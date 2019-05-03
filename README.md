@@ -8,10 +8,7 @@ Im use yarn so we need to install it:
 After that install node modules:
 ### `yarn`
 
-And then we can run the Chat:
+And then we can run the App:
 ### `yarn start`
-
-Run the server for the chat to work:
-### `node server.js`
 
 
