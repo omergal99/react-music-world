@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  color: $clr0;
+  font-family: sans-serif, Arial, serif;
+}
+
+body {
+  margin: auto;
+  font-size: 16px;
+  height: 100%;
+  background-color: $clr5;
+}
+
+// img {
+//     width:100%;
+// }
+
+.App {
+  text-align: center;
+  max-width: 100%;
+}
