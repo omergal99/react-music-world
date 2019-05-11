@@ -1,0 +1,24 @@
+{
+  "rooms": [
+    {
+      "_id": "kj23hkndsk01",
+      "owner": "omer",
+      "img": "put img src"
+    },
+    {
+      "_id": "kj23hkndsk02",
+      "owner": "messi",
+      "img": "put img src"
+    },
+    {
+      "_id": "kj23hkndsk03",
+      "owner": "shusan",
+      "img": "put img src"
+    },
+    {
+      "_id": "kj23hkndsk04",
+      "owner": "ron",
+      "img": "put img src"
+    }
+  ]
+}

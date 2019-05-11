@@ -1,10 +1,12 @@
 import React from 'react';
 import './assets/css/App.scss';
 
+import Router from './Router';
+
 function App() {
   return (
     <div className="App">
-      <h1>Music App</h1>
+      <Router />
     </div>
   );
 }
