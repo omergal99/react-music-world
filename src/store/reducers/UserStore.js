@@ -1,5 +1,5 @@
 export default (state = { currUser: 'user2' }, action) => {
-    console.log('reducer: USER state: ', state, ", action.type: ", action)
+    // console.log('reducer: USER state: ', state, ", action.type: ", action)
 
     var payloadUser = (action.payload) ? { currUser: action.payload.user } : { currUser: 'user3' };
 

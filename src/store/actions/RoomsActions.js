@@ -1,18 +1,37 @@
 import RoomsService from '../../services/RoomsService';
 
-async function getRooms() {
-    const roomsFromService = await RoomsService.getRooms();
-    return { type: '', payload: roomsFromService };
-}
-
-// function addMsg(txt, from) {
-//     return {
-//         type: 'pushToMsgs',
-//         payload: { txt, from }
-//     }
+// function getRooms() {
+//   return (dispatch) => {
+//     RoomsService.getRooms()
+//       .then((roomsService) => {
+//         if (roomsService && roomsService.length) {
+//           dispatch({ type: '', payload: { rooms: roomsService } })
+//         } else {
+//           dispatch({ type: '' })
+//         }
+//       })
+//   }
 // }
 
+function getRooms() {
+  return async (dispatch) => {
+    const roomsService = await RoomsService.getRooms();
+    if (roomsService && roomsService.length) {
+      dispatch({ type: '', payload: { rooms: roomsService } });
+    } else {
+      dispatch({ type: '' });
+    }
+  }
+}
+
+function getRoomById(id) {
+  return async (dispatch) => {
+    const currRoom = await RoomsService.getRoomById(id);
+    dispatch({ type: 'getOneRoom', payload: { currRoom } });
+  }
+}
+
 export default {
-    getRooms,
-    // addMsg,
+  getRooms,
+  getRoomById
 }

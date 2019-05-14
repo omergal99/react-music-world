@@ -13,7 +13,7 @@ class Home extends Component {
   }
   playerClicked(ev) {
     ev.preventDefault()
-    this.props.history.push(`/MusicPlayer`)
+    this.props.history.push(`/musicPlayer`)
   }
   roomsClicked(ev) {
     ev.preventDefault()

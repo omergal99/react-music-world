@@ -1,14 +1,29 @@
 export default (state, action) => {
-    var copy;
-    if (!state) {
-        copy = [{ txt: 'hello', from: 'Omer' }, { txt: 'hii', from: 'Amit' }]
+  var copy = {};
+  if (!state) {
+    if (action.payload) {
+      copy.rooms = (action.payload.rooms) ? action.payload.rooms : [];
+      copy.currRoom = (action.payload.currRoom) ? action.payload.currRoom : null;
+    }
+  } else {
+    if (!state.rooms) {
+      copy.rooms = (action.payload.rooms) ? action.payload.rooms : null;
     } else {
-        copy = [...state];
+      copy.rooms = [...state.rooms];
     }
-    console.log('reducer: ROOMS state: ', state, ", action.type: ", action)
+    if (!state.currRoom) {
+      copy.currRoom = (action.payload.currRoom) ? action.payload.currRoom : null;
+    } else {
+      copy.currRoom = { ...state.currRoom };
+    }
+  }
+  console.log('reducer: ROOMS state-copy: ', copy, ", action.type: ", action)
 
-    switch (action.type) {
-        default:
-            return copy;
-    }
+  switch (action.type) {
+    case 'getOneRoom':
+      copy.currRoom = action.payload.currRoom;
+      return copy;
+    default:
+      return copy;
+  }
 }

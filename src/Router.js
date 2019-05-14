@@ -6,7 +6,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MusicPlayer from './pages/MusicPlayer';
+
 import MusicRooms from './pages/MusicRooms';
+import MusicRoomDetails from './pages/MusicRoomDetails';
 
 //CMPS
 import NavBar from './cmps/NavBar';
@@ -29,8 +31,9 @@ class Router extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/MusicPlayer" component={MusicPlayer} />
+            <Route exact path="/musicPlayer" component={MusicPlayer} />
             <Route exact path="/musicRooms" component={MusicRooms} />
+            <Route exact path="/musicRooms/:id" component={MusicRoomDetails} />
           </Switch>
 
         </HashRouter>

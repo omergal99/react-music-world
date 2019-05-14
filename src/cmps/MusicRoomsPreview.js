@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const MusicRoomsPreview = ({ room }) => (
-  <li>
-    {room}
-  </li>
-)
+class MusicRoomsPreview extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.roomCliked = this.roomCliked.bind(this);
+  }
 
-export default MusicRoomsPreview;
+  roomCliked() {
+    this.props.history.push(`/musicRooms/${this.props.room._id}`)
+  }
+
+  render() {
+    return (
+      <li onClick={this.roomCliked}>
+        id: {this.props.room._id}<br />
+        owner: {this.props.room.owner}
+      </li>
+    )
+  }
+}
+
+export default withRouter(MusicRoomsPreview);
