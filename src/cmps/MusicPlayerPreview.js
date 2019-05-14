@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 class MusicPlayerPreview extends Component {
   constructor(props, context) {
     super(props, context);
-    this.songCliked = this.songCliked.bind(this);
+    this.songClicked = this.songClicked.bind(this);
   }
 
-  songCliked() {
-    // this.props.history.push(`/musicRooms/${this.props.room._id}`)
+  songClicked() {
+    this.props.emitSong(this.props.song);
   }
 
   render() {
     return (
-      <li onClick={this.songCliked}>
+      <li onClick={this.songClicked}>
         Song Name: {this.props.song.name}
       </li>
     )

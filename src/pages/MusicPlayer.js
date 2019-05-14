@@ -91,6 +91,18 @@ class MusicPlayer extends Component {
       this.setSongLength();
     }
   }
+  
+  switchCurrSong(selectedSong){
+    // console.log(selectedSong.audio)
+    clearInterval(this.progressBarInterval);
+    this.currSong.pause();
+    this.setState({
+      playTime: 0,
+      isPlaying: false
+    })
+    this.currSong = selectedSong.audio;
+    this.setSongLength();
+  }
 
   render() {
     return (
@@ -98,7 +110,7 @@ class MusicPlayer extends Component {
         <div className="deatails flex flex-col space-center align-center">
           <img src="assets/img/icons/Music-App.png" alt="Song" />
           {this.state.songs &&
-            <MusicPlayerList songs={this.state.songs} />
+            <MusicPlayerList songs={this.state.songs} SongClicked={this.switchCurrSong.bind(this)} />
           }
           <input type="file" onChange={this.audioUpload.bind(this)} />
         </div>
