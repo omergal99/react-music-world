@@ -1,0 +1,46 @@
+.home {
+  .head-container {
+    min-height: 200px;
+    height: 50vw;
+    max-height: 100vh;
+    background-color: #7f7f7f;
+    background-image: url("../../assets/img/bci/music-space.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: unset;
+    background-position: center;
+  }
+  .main-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 0;
+    .wrap-img {
+      border-radius: 2px;
+      cursor: pointer;
+      background-color: #4f4242;
+      img {
+        height: 120px;
+        padding: 4px 14px;
+      }
+      .text {
+        background-color: #e9ecc94f;
+        margin: auto 0;
+        height: 28px;
+        line-height: 28px;
+        font-size: 0.9em;
+      }
+      @media (min-width: 500px) {
+        img {
+          height: 150px;
+          padding: 6px 18px;
+        }
+        .text {
+          height: 36px;
+          line-height: 36px;
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}

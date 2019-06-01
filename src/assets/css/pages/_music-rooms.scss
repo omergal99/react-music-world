@@ -1,0 +1,40 @@
+.music-rooms {
+  padding: 10px 0;
+  .filter {
+    margin: 0 0 8px 0;
+    min-width: 55%;
+    font-size: 1.1rem;
+    padding: 6px 8px;
+    border: 0.5px solid rgb(68, 68, 68);
+    background-color: $clr6;
+    border-radius: 2px;
+    &:focus {
+      background-color: $clr5;
+      outline: 1px solid rgba(0, 0, 0, 0);
+    }
+  }
+  .room-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 10px;
+    margin: 0 10px;
+    list-style-type: none;
+    padding: 0;
+    li {
+      cursor: pointer;
+      padding: 2px 2px 2px 2px;
+      font-family: libre, Arial, Helvetica, sans-serif;
+      border-radius: 2px;
+      color: $clr5;
+      background-color: $clr3;
+      height: 100px;
+    }
+  }
+
+  @media (min-width: 500px) {
+    .contact-list {
+      grid-gap: 20px;
+      margin: 0 20px;
+    }
+  }
+}

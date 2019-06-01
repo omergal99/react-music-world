@@ -1,0 +1,32 @@
+.nav-bar {
+  padding: 4px 14px;
+  background-color: $clr1;
+  min-height: 40px;
+  .logo {
+    a {
+      font-family: libre, Arial, Helvetica, sans-serif;
+      color: $clr4;
+      display: inline-block;
+      font-size: 1.6em;
+      transition: color 0.3s;
+      &:hover {
+        color: $clr4h;
+      }
+    }
+  }
+  .links {
+    margin: auto 0 auto 14px;
+    a {
+      font-family: sans_pro, Arial, Helvetica, sans-serif;
+      color: $clr6;
+      font-size: 1.2em;
+      transition: color 0.3s;
+      &:not(:last-child) {
+        margin-right: 14px;
+      }
+      &:hover {
+        color: $clr3h;
+      }
+    }
+  }
+}
