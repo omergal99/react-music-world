@@ -85,6 +85,7 @@ class MusicPlayer extends Component {
 
   _startProgressInterval() {
     this.progressBarInterval = setInterval(() => {
+      console.log(this.currSong.currentTime)
       if (this.currSong.currentTime < this.state.songLength) {
         this.setState({ playTime: Number(this.state.playTime) + 1 })
       } else {
