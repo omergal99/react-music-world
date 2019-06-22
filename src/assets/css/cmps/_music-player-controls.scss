@@ -20,7 +20,7 @@
         -webkit-appearance: none;
         cursor: pointer;
         border: 1px solid #000000;
-        height: 28px;
+        height: 32px;
         width: 12px;
         border-radius: 2px;
         background: #ffbe45;
@@ -30,8 +30,10 @@
       input::-webkit-slider-runnable-track {
         cursor: pointer;
         width: 100%;
-        height: 12px;
+        height: 16px;
         // background: #53cfd8;
+        // background-color: #53cfd8;
+        border-radius: 4px;
       }
     }
     .controls {

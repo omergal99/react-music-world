@@ -50,11 +50,10 @@ class MusicPlayerControls extends Component {
   }
 
   goTo = (ev) => {
-    if(!this.state.isPlaying){
+    if (!this.state.isPlaying) {
       this.togglePlay()
     }
     this.props.currSong.currentTime = ev.target.value;
-    ev.target.max = this.props.currSong.duration;
   }
 
   togglePlay = () => {
@@ -99,10 +98,11 @@ class MusicPlayerControls extends Component {
         this.setState({ isPlaying: false })
         clearInterval(this.progressBarInterval);
       }
-    }, 500)
+    }, 10)
   }
 
   _timeFilter(num) {
+    // return num.toFixed(2)
     var fixed = Number(num).toFixed();
     var sec = fixed % 60;
     if (sec < 10) sec = '0' + sec;
@@ -113,7 +113,8 @@ class MusicPlayerControls extends Component {
 
   render() {
     var runTime = this._timeFilter(this.props.currSong.currentTime);
-    var songLength = this._timeFilter(this.state.songLength)
+    var endTime = this._timeFilter(this.state.songLength)
+    var songLength = this.state.songLength;
     return (
       <div className="player flex flex-col space-center">
 
@@ -129,16 +130,16 @@ class MusicPlayerControls extends Component {
 
           <div className="flex space-between">
             <label>{runTime}</label>
-            <label>{songLength}</label>
+            <label>{endTime}</label>
           </div>
 
-          <input type="range" name="points" min="0"
+          <input type="range" name="points" min="0" step="0.01"
             style={{
               background: `linear-gradient(to right, #ffcf4b 0%,
-              #ffcf4b ${(this.props.currSong.currentTime / this.state.songLength) * 100}%,
-              gray ${(this.props.currSong.currentTime / this.state.songLength) * 100}%, gray 100%)`
+              #ffcf4b ${(this.props.currSong.currentTime / songLength) * 100}%,
+              gray ${(this.props.currSong.currentTime / songLength) * 100}%, gray 100%)`
             }}
-            max={this.state.songLength ? this.state.songLength : 200}
+            max={songLength ? songLength : 200}
             value={this.props.currSong.currentTime}
             onChange={this.goTo.bind(this)}
           />

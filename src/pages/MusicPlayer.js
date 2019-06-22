@@ -16,10 +16,10 @@ class MusicPlayer extends Component {
     playTime: 0,
     songLength: 200,
     songs: [],
-    currSongName: 'deadmau5 - Strobe.mp3'
+    currSongName: 'omer.mp3'
   }
 
-  currSong = new Audio('assets/mp3/deadmau5 - Strobe.mp3');
+  currSong = new Audio('assets/mp3/omer.mp3');
 
   componentDidMount() {
     const songsName = require.context('../assets/mp3', false, /\.mp3$/).keys();
@@ -75,7 +75,7 @@ class MusicPlayer extends Component {
               SongClicked={this.switchSong.bind(this)}
             />
           }
-          
+
           <input type="file" multiple
             onChange={this.audioUpload.bind(this)} />
           <br />
