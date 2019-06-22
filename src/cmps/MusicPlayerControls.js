@@ -115,6 +115,7 @@ class MusicPlayerControls extends Component {
     var runTime = this._timeFilter(this.props.currSong.currentTime);
     var endTime = this._timeFilter(this.state.songLength)
     var songLength = this.state.songLength;
+    var step = (this.state.songLength / 50) * 0.01;
     return (
       <div className="player flex flex-col space-center">
 
@@ -133,7 +134,7 @@ class MusicPlayerControls extends Component {
             <label>{endTime}</label>
           </div>
 
-          <input type="range" name="points" min="0" step="0.01"
+          <input type="range" name="points" min="0" step={step}
             style={{
               background: `linear-gradient(to right, #ffcf4b 0%,
               #ffcf4b ${(this.props.currSong.currentTime / songLength) * 100}%,
