@@ -13,7 +13,7 @@ class MusicPlayerPreview extends Component {
   render() {
     return (
       <li onClick={this.songClicked}>
-        Song Name: {this.props.song.name}
+        {this.props.song.name}
       </li>
     )
   }
