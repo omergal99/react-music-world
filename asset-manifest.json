@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/react-music-world/static/css/main.4ae1352b.chunk.css",
+    "main.js": "/react-music-world/static/js/main.f708d5de.chunk.js",
+    "main.js.map": "/react-music-world/static/js/main.f708d5de.chunk.js.map",
+    "runtime~main.js": "/react-music-world/static/js/runtime~main.b7fc2ecd.js",
+    "runtime~main.js.map": "/react-music-world/static/js/runtime~main.b7fc2ecd.js.map",
+    "static/js/2.ec95753a.chunk.js": "/react-music-world/static/js/2.ec95753a.chunk.js",
+    "static/js/2.ec95753a.chunk.js.map": "/react-music-world/static/js/2.ec95753a.chunk.js.map",
+    "index.html": "/react-music-world/index.html",
+    "precache-manifest.2a81d8c3a88a220e8a7582d1491641ac.js": "/react-music-world/precache-manifest.2a81d8c3a88a220e8a7582d1491641ac.js",
+    "service-worker.js": "/react-music-world/service-worker.js",
+    "static/css/main.4ae1352b.chunk.css.map": "/react-music-world/static/css/main.4ae1352b.chunk.css.map",
+    "static/media/Beautiful_Memories.mp3": "/react-music-world/static/media/Beautiful_Memories.2106f2b5.mp3",
+    "static/media/Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3": "/react-music-world/static/media/Bruno Mars - Runaway Baby (Official Audio Video) [HD].5b814813.mp3",
+    "static/media/Forest_Ventures.mp3": "/react-music-world/static/media/Forest_Ventures.05d8d65c.mp3",
+    "static/media/Happy_Dreams.mp3": "/react-music-world/static/media/Happy_Dreams.6bfd74b4.mp3",
+    "static/media/App.scss": "/react-music-world/static/media/music-space.88485035.jpg",
+    "static/media/Tears_of_Joy.mp3": "/react-music-world/static/media/Tears_of_Joy.fc0ec620.mp3",
+    "static/media/Warm_Light.mp3": "/react-music-world/static/media/Warm_Light.c3edb863.mp3",
+    "static/media/daughtry - home.mp3": "/react-music-world/static/media/daughtry - home.80cd94b2.mp3",
+    "static/media/deadmau5 - Strobe.mp3": "/react-music-world/static/media/deadmau5 - Strobe.9dc36e9d.mp3",
+    "static/media/משה פרץ - אם זאת מלחמה - moshe perez - em zot milhama.mp3": "/react-music-world/static/media/משה פרץ - אם זאת מלחמה - moshe perez - em zot milhama.18a84fbd.mp3"
+  }
+}
