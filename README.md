@@ -13,4 +13,3 @@ After that install node modules:
 And then we can run the App:
 ### `yarn start`
 
-I am still work on it, and have not upload to web adress yet.
