@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a65c9b6620c67f16287bc71d334d1e55",
+    "revision": "00010f1140c6e4cb168be8ac15a58ac4",
     "url": "/react-music-world/index.html"
   },
   {
-    "revision": "e540ddcdfcc13e12fc65",
-    "url": "/react-music-world/static/css/main.4ae1352b.chunk.css"
+    "revision": "3d2f14f011729f9fbfbb",
+    "url": "/react-music-world/static/css/main.b9d00e44.chunk.css"
   },
   {
     "revision": "4b3cde3768457b7f73d7",
     "url": "/react-music-world/static/js/2.ec95753a.chunk.js"
   },
   {
-    "revision": "e540ddcdfcc13e12fc65",
-    "url": "/react-music-world/static/js/main.f708d5de.chunk.js"
+    "revision": "3d2f14f011729f9fbfbb",
+    "url": "/react-music-world/static/js/main.1c1c4019.chunk.js"
   },
   {
     "revision": "ffbcd5a7e025b5e7edbd",
@@ -50,6 +50,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "849e67957ea4dd5edb38eedb9d5743f1",
     "url": "/react-music-world/static/media/Quando-Regular.849e6795.ttf"
+  },
+  {
+    "revision": "5a3c0694c9b81daf24aff1023a114edb",
+    "url": "/react-music-world/static/media/SourceSansPro-ExtraLight.5a3c0694.ttf"
   },
   {
     "revision": "3f482321becfaa40fcb19825fa717859",
