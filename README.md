@@ -1,4 +1,4 @@
-I have not yet uploaded the project to a URL
+I have uploaded the project to a URL: https://omergal99.github.io/react-music-world/#/
 
 ## Explanation
 
@@ -13,4 +13,3 @@ After that install node modules:
 And then we can run the App:
 ### `yarn start`
 
-I am still work on it, and have not upload to web adress yet.
