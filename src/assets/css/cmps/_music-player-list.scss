@@ -1,6 +1,6 @@
 .music-player {
   .deatails {
-    // height: calc(100% - 120px);
+    height: calc(100% - 140px);
     background-color: rgb(99, 92, 82);
     padding: 10px 0 10px 0;
     img {
@@ -10,6 +10,7 @@
     }
     .song-list {
       padding: 0;
+      overflow-y: auto;
       li {
         list-style-type: none;
         cursor: pointer;

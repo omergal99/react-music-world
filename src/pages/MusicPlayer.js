@@ -12,21 +12,24 @@ class MusicPlayer extends Component {
   // }
 
   state = {
-    isPlaying: false,
-    playTime: 0,
-    songLength: 200,
+    // isPlaying: false,
+    // playTime: 0,
+    // songLength: 200,
     songs: [],
-    currSongName: 'Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3'
+    currSongName: 'Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3',
+    currSong: new Audio('assets/mp3/Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3')
   }
 
-  currSong = new Audio('assets/mp3/Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3');
-
   componentDidMount() {
+    this.setSongs();
+  }
+
+  setSongs() {
     const songsName = require.context('../assets/mp3', false, /\.mp3$/).keys();
     var songs = songsName.map(songName => {
       return { name: songName.substring(2), audio: new Audio(`assets/mp3/${songName.substring(2)}`) }
     });
-    this.setState({ songs })
+    this.setState({ songs });
   }
 
   audioUpload(ev) {
@@ -36,31 +39,35 @@ class MusicPlayer extends Component {
         return { name: file.name, audio: new Audio(URL.createObjectURL(file)) }
       })
       var updateSongs = [...multipleSongs, ...this.state.songs];
-      this.setState({ songs: updateSongs, currSongName: files[0].name });
-      this.currSong = new Audio(URL.createObjectURL(files[0]));
+      this.setState({
+        songs: updateSongs, currSongName: files[0].name,
+        currSong: new Audio(URL.createObjectURL(files[0]))
+      });
     }
   }
 
   switchSong(selectedSong) {
-    this.setState({ currSongName: selectedSong.name });
-    this.currSong = selectedSong.audio;
+    this.setState({
+      currSongName: selectedSong.name,
+      currSong: selectedSong.audio
+    });
   }
 
   prevSong() {
     var currSongIdx = this.state.songs.findIndex(song => song.name === this.state.currSongName);
     if (currSongIdx) {
-      this.switchSong(this.state.songs[currSongIdx - 1])
+      this.switchSong(this.state.songs[currSongIdx - 1]);
     } else {
-      this.switchSong(this.state.songs[this.state.songs.length - 1])
+      this.switchSong(this.state.songs[this.state.songs.length - 1]);
     }
   }
 
   nextSong() {
     var currSongIdx = this.state.songs.findIndex(song => song.name === this.state.currSongName);
     if (this.state.songs.length - 1 === currSongIdx) {
-      this.switchSong(this.state.songs[0])
+      this.switchSong(this.state.songs[0]);
     } else {
-      this.switchSong(this.state.songs[currSongIdx + 1])
+      this.switchSong(this.state.songs[currSongIdx + 1]);
     }
   }
 
@@ -75,14 +82,17 @@ class MusicPlayer extends Component {
               SongClicked={this.switchSong.bind(this)}
             />
           }
-          <input type="file" multiple
-            onChange={this.audioUpload.bind(this)} />
-          <br />
-          <input type="file" webkitdirectory="true" mozdirectory="true"
-            onChange={this.audioUpload.bind(this)} />
+          <div className="upload-file flex wrap space-center">
+            <label title="Upload files" htmlFor="upload-files">Upload Files ☁ </label>
+            <input id="upload-files" onChange={this.audioUpload.bind(this)} multiple type="file" />
+
+            <label title="Upload Directories" htmlFor="upload-files">Upload Directories ☁ </label>
+            <input id="upload-files" webkitdirectory="true" mozdirectory="true"
+              onChange={this.audioUpload.bind(this)} multiple type="file" />
+          </div>
         </div>
 
-        <MusicPlayerControls currSong={this.currSong}
+        <MusicPlayerControls currSong={this.state.currSong}
           prevSong={this.prevSong.bind(this)}
           nextSong={this.nextSong.bind(this)}
         />

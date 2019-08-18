@@ -43,7 +43,7 @@ class MusicPlayerControls extends Component {
       }
     }
     if (ev.keyCode === 39) { // Right Arrow
-      if (Number(this.props.currSong.currentTime) + 5 < this.state.songLength) {
+      if (Number(this.props.currSong.currentTime) < this.state.songLength) {
         this.props.currSong.currentTime = this.props.currSong.currentTime + 5;
       }
     }
@@ -95,14 +95,13 @@ class MusicPlayerControls extends Component {
       if (this.props.currSong.currentTime < this.state.songLength) {
         this.setState({ isPlaying: true })
       } else {
-        this.setState({ isPlaying: false })
+        this.props.nextSong();
         clearInterval(this.progressBarInterval);
       }
     }, 10)
   }
 
   _timeFilter(num) {
-    // return num.toFixed(2)
     var fixed = Number(num).toFixed();
     var sec = fixed % 60;
     if (sec < 10) sec = '0' + sec;
@@ -112,16 +111,16 @@ class MusicPlayerControls extends Component {
   }
 
   render() {
+    var songLength = this.state.songLength ? this.state.songLength : 200;
     var runTime = this._timeFilter(this.props.currSong.currentTime);
-    var endTime = this._timeFilter(this.state.songLength)
-    var songLength = this.state.songLength;
-    var step = (this.state.songLength / 50) * 0.01;
+    var endTime = this._timeFilter(songLength);
+    var step = (songLength / 50) * 0.01;
     return (
       <div className="player flex flex-col space-center">
 
         <div className="controls flex space-center">
           <button onClick={this.props.prevSong}>|&lt;</button>
-          <button onClick={this.togglePlay}>
+          <button className="play" onClick={this.togglePlay}>
             {this.state.isPlaying ? 'Pause' : 'Play'}
           </button>
           <button onClick={this.props.nextSong}>&gt;|</button>
@@ -129,7 +128,7 @@ class MusicPlayerControls extends Component {
 
         <div className="progress">
 
-          <div className="flex space-between">
+          <div className="time flex space-between">
             <label>{runTime}</label>
             <label>{endTime}</label>
           </div>
