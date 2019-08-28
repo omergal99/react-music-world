@@ -24,6 +24,10 @@ class MusicPlayer extends Component {
     this.setSongs();
   }
 
+  componentWillUnmount(){
+    
+  }
+
   setSongs() {
     const songsName = require.context('../assets/mp3', false, /\.mp3$/).keys();
     var songs = songsName.map(songName => {
