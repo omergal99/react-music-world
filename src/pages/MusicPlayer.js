@@ -15,7 +15,7 @@ class MusicPlayer extends Component {
     // isPlaying: false,
     // playTime: 0,
     // songLength: 200,
-    songs: [],
+    songs: null,
     currSongName: 'Bruno Mars - Runaway Baby.mp3',
     currSong: new Audio('assets/mp3/Bruno Mars - Runaway Baby.mp3')
   }
