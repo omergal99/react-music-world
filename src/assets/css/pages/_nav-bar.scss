@@ -4,10 +4,10 @@
   min-height: 40px;
   .logo {
     a {
-      font-family: libre, Arial, Helvetica, sans-serif;
-      color: $clr4;
+      font-family: sans_pt, libre, Arial, Helvetica, sans-serif;
+      color: #9949ce;
       display: inline-block;
-      font-size: 1.6em;
+      font-size: 1.8em;
       transition: color 0.3s;
       &:hover {
         color: $clr4h;

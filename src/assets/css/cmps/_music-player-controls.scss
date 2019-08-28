@@ -1,10 +1,10 @@
 .music-player {
   .player {
     height: 140px;
-    background-color: rgb(82, 99, 97);
+    background-color: #5f5263;
     .progress {
-      padding: 6px 12px;
-      .time{
+      padding: 0 12px 6px 12px;
+      .time {
         font-size: 1.2em;
       }
       input {
@@ -41,17 +41,17 @@
     }
     .controls {
       font-family: sans_pro, Arial, Helvetica, sans-serif;
-      padding: 0 10px 6px 10px;
+      padding: 0 10px;
       button {
+        border-radius: 50%;
         font-size: 1.2em;
         cursor: pointer;
         margin: 0 1em;
+        height: 40px;
+        padding: 0;
         background-color: rgb(255, 215, 215);
         border: 1px solid rgb(255, 155, 155);
-        width: 50px;
-        &.play{
-          width: 80px;
-        }
+        width: 40px;
       }
     }
   }

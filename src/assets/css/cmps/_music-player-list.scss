@@ -2,20 +2,77 @@
   .deatails {
     height: calc(100% - 140px);
     background-color: rgb(99, 92, 82);
-    padding: 10px 0 10px 0;
-    img {
-      width: 100px;
-      height: auto;
-      border-radius: 4px;
+    padding: 10px 0 20px 0;
+    .title {
+      img {
+        width: 200px;
+        height: auto;
+        border-radius: 4px;
+        display: block;
+        margin: 0 auto 6px auto;
+      }
+      span {
+        font-size: 1.2em;
+        display: block;
+        padding: 0 0 6px 0;
+      }
     }
     .song-list {
       padding: 0;
       overflow-y: auto;
+      width: 100%;
+      background-color: #7777778a;
+      text-align: left;
+      padding: 8px 10px;
+      margin: 0 0 1em;
+      // overflow-y: scroll;
+      // &::-webkit-scrollbar {
+      //   width: 12px;
+      // }
+      // &::-webkit-scrollbar-track {
+      //   background: rgba(199, 228, 255, 0.651);
+      // }
+      // &::-webkit-scrollbar-thumb {
+      //   background: rgb(75, 144, 209);
+      // }
+      // &::-webkit-scrollbar-thumb:hover {
+      //   background: rgb(83, 160, 233);
+      // }
+      // &::-webkit-scrollbar-button:single-button {
+      //   background-color: #bbbbbb;
+      //   display: block;
+      //   border-style: solid;
+      //   height: 10px;
+      // }
+      // &::-webkit-scrollbar-button:single-button:vertical:decrement {
+      //   border-width: 0 6px 6px 6px;
+      //   border-color: transparent transparent #555555 transparent;
+      // }
+      // &::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+      //   border-color: transparent transparent #777777 transparent;
+      // }
+      // &::-webkit-scrollbar-button:single-button:vertical:increment {
+      //   border-width: 6px 6px 0 6px;
+      //   border-color: #555555 transparent transparent transparent;
+      // }
+      // &::-webkit-scrollbar-button:single-button:vertical:increment:hover {
+      //   border-color: #777777 transparent transparent transparent;
+      // }
       li {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
         list-style-type: none;
         cursor: pointer;
-        &:hover{
-          color: rgb(0, 132, 255);
+        background-color: #3a3a51;
+        border-radius: 2px;
+        &:not(:last-child) {
+          margin: 0 0 6px 0;
+        }
+        padding: 6px 6px;
+        &:hover {
+          background-color: #282838;
+          color: #6ed8e1;
         }
       }
     }

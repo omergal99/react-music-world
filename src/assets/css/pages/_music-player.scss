@@ -1,17 +1,16 @@
 .music-player {
-  height: calc(100vh - 40px);
-
+  height: calc(100vh - 45px);
   .upload-file {
     label {
       padding: 6px 8px;
       cursor: pointer;
-      background-color: #3cbc8d;
+      background-color: #3cbcb6;
       border-radius: 4px;
       outline: none;
-      margin: 6px;
+      margin: 0 6px 6px;
       font-family: cursive, merienda-font, arial, serif, sans-serif;
       &:hover {
-        background-color: #45c797;
+        background-color: #37aca6;
       }
     }
     input {

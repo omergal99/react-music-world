@@ -119,11 +119,11 @@ class MusicPlayerControls extends Component {
       <div className="player flex flex-col space-center">
 
         <div className="controls flex space-center">
-          <button onClick={this.props.prevSong}>|&lt;</button>
-          <button className="play" onClick={this.togglePlay}>
-            {this.state.isPlaying ? 'Pause' : 'Play'}
+          <button onClick={this.props.prevSong}>&lt;&lt;</button>
+          <button onClick={this.togglePlay} style={{padding: this.state.isPlaying ? '0px 0px 2px 1px' : '2px 0px 0px 4px'}}>
+          {this.state.isPlaying ? '❚❚' : '▶'}
           </button>
-          <button onClick={this.props.nextSong}>&gt;|</button>
+          <button onClick={this.props.nextSong}>&gt;&gt;</button>
         </div>
 
         <div className="progress">

@@ -16,8 +16,8 @@ class MusicPlayer extends Component {
     // playTime: 0,
     // songLength: 200,
     songs: [],
-    currSongName: 'Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3',
-    currSong: new Audio('assets/mp3/Bruno Mars - Runaway Baby (Official Audio Video) [HD].mp3')
+    currSongName: 'Bruno Mars - Runaway Baby.mp3',
+    currSong: new Audio('assets/mp3/Bruno Mars - Runaway Baby.mp3')
   }
 
   componentDidMount() {
@@ -75,8 +75,12 @@ class MusicPlayer extends Component {
     return (
       <section className="music-player">
         <div className="deatails flex flex-col space-center align-center">
-          <img src="assets/img/icons/Music-App.png" alt="Song" />
-          {this.state.currSongName}
+
+          <div className="title">
+            <img src="assets/img/icons/Music-App.png" alt="Song" />
+            <span>{this.state.currSongName}</span>
+          </div>
+
           {this.state.songs &&
             <MusicPlayerList songs={this.state.songs}
               SongClicked={this.switchSong.bind(this)}
@@ -86,8 +90,8 @@ class MusicPlayer extends Component {
             <label title="Upload files" htmlFor="upload-files">Upload Files ☁ </label>
             <input id="upload-files" onChange={this.audioUpload.bind(this)} multiple type="file" />
 
-            <label title="Upload Directories" htmlFor="upload-files">Upload Directories ☁ </label>
-            <input id="upload-files" webkitdirectory="true" mozdirectory="true"
+            <label title="Upload Directories" htmlFor="upload-directories">Upload Directories ☁ </label>
+            <input id="upload-directories" webkitdirectory="true" mozdirectory="true"
               onChange={this.audioUpload.bind(this)} multiple type="file" />
           </div>
         </div>
