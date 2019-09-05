@@ -70,8 +70,12 @@ class MusicPlayerControls extends Component {
 
   _setProgressLength() {
     setTimeout(() => {
-      this.setState({ songLength: this.props.currSong.duration })
-    }, 200)
+      if (this.props.currSong.duration) {
+        this.setState({ songLength: this.props.currSong.duration })
+      } else {
+        this._setProgressLength()
+      }
+    }, 100)
   }
 
   _stopSong() {
@@ -120,8 +124,8 @@ class MusicPlayerControls extends Component {
 
         <div className="controls flex space-center">
           <button onClick={this.props.prevSong}>&lt;&lt;</button>
-          <button onClick={this.togglePlay} style={{padding: this.state.isPlaying ? '0px 0px 2px 1px' : '2px 0px 0px 4px'}}>
-          {this.state.isPlaying ? '❚❚' : '▶'}
+          <button onClick={this.togglePlay} style={{ padding: this.state.isPlaying ? '0px 0px 2px 1px' : '2px 0px 0px 4px' }}>
+            {this.state.isPlaying ? '❚❚' : '▶'}
           </button>
           <button onClick={this.props.nextSong}>&gt;&gt;</button>
         </div>
