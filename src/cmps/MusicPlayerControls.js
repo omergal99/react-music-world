@@ -9,6 +9,7 @@ class MusicPlayerControls extends Component {
   state = {
     isPlaying: false,
     songLength: 300,
+    updateBar: true,
   }
 
   componentDidMount() {
@@ -18,12 +19,22 @@ class MusicPlayerControls extends Component {
 
   componentWillReceiveProps() {
     this._stopSong();
+    this._setProgressLength();
     this._activeCurrSong();
   }
 
   componentWillUnmount() {
     this._stopSong();
     document.removeEventListener('keydown', this.keyConteols.bind(this));
+    if (this.progressLengthTimeout) {
+      clearTimeout(this.progressLengthTimeout);
+      this.progressLengthTimeout = 0;
+    }
+    if (this.activeCurrSongTimeout) {
+      clearTimeout(this.activeCurrSongTimeout);
+      this.activeCurrSongTimeout = 0;
+      clearInterval(this.progressBarInterval);
+    }
   }
 
   keyConteols(ev) {
@@ -59,23 +70,12 @@ class MusicPlayerControls extends Component {
   togglePlay = () => {
     this.setState({ isPlaying: !this.state.isPlaying }, () => {
       if (this.state.isPlaying) {
-        this.props.currSong.play();
-        this._startProgressInterval();
+        this._playAndInterval();
       } else {
         this.props.currSong.pause();
         clearInterval(this.progressBarInterval);
       }
     });
-  }
-
-  _setProgressLength() {
-    setTimeout(() => {
-      if (this.props.currSong.duration) {
-        this.setState({ songLength: this.props.currSong.duration })
-      } else {
-        this._setProgressLength()
-      }
-    }, 100)
   }
 
   _stopSong() {
@@ -84,20 +84,40 @@ class MusicPlayerControls extends Component {
     clearInterval(this.progressBarInterval);
   }
 
+  _playAndInterval = () => {
+    this.props.currSong.play();
+    this._startProgressInterval();
+  }
+
+  _setProgressLength() {
+    if (this.props.currSong.duration) {
+      this.setState({ songLength: this.props.currSong.duration })
+    } else {
+      this.progressLengthTimeout = setTimeout(() => {
+        this._setProgressLength()
+      }, 200)
+    }
+  }
+
   _activeCurrSong() {
-    setTimeout(() => {
-      if (this.state.isPlaying) {
-        this.props.currSong.play();
-        this._startProgressInterval();
+    if (!this.props.currSong) {
+      return;
+    }
+    this.activeCurrSongTimeout = setTimeout(() => {
+      if (this.props.currSong.readyState >= 2) {
+        if (this.state.isPlaying) {
+          this._playAndInterval();
+        }
+      } else {
+        this._activeCurrSong()
       }
-    }, 0)
-    this._setProgressLength();
+    }, 300)
   }
 
   _startProgressInterval() {
     this.progressBarInterval = setInterval(() => {
       if (this.props.currSong.currentTime < this.state.songLength) {
-        this.setState({ isPlaying: true })
+        this.setState({ updateBar: true })
       } else {
         this.props.nextSong();
         clearInterval(this.progressBarInterval);
