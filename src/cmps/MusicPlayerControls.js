@@ -17,7 +17,10 @@ class MusicPlayerControls extends Component {
     document.addEventListener('keydown', this.keyConteols.bind(this));
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
+
+    console.log(nextProps.currSong)
+    console.log(this.props.currSong)
     this._stopSong();
     this._setProgressLength();
     this._activeCurrSong();
@@ -90,19 +93,16 @@ class MusicPlayerControls extends Component {
   }
 
   _setProgressLength() {
+    this.progressLengthTimeout = setTimeout(() => {
     if (this.props.currSong.duration) {
       this.setState({ songLength: this.props.currSong.duration })
     } else {
-      this.progressLengthTimeout = setTimeout(() => {
         this._setProgressLength()
-      }, 200)
-    }
+      }
+    }, 200)
   }
 
   _activeCurrSong() {
-    if (!this.props.currSong) {
-      return;
-    }
     this.activeCurrSongTimeout = setTimeout(() => {
       if (this.props.currSong.readyState >= 2) {
         if (this.state.isPlaying) {
