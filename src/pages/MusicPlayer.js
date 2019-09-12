@@ -88,6 +88,7 @@ class MusicPlayer extends Component {
           {this.state.songs &&
             <MusicPlayerList songs={this.state.songs}
               SongClicked={this.switchSong.bind(this)}
+              currSongName={this.state.currSongName}
             />
           }
           <div className="upload-file flex wrap space-center">

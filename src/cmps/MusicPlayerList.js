@@ -17,7 +17,7 @@ class MusicPlayerList extends Component {
     return (
       <ul className="song-list">
         {this.props.songs.map((song, idx) =>
-          <MusicPlayerPreview song={song} emitSong={this.sendingSong} key={idx} />)}
+          <MusicPlayerPreview song={song} emitSong={this.sendingSong} currSongName={this.props.currSongName} key={idx} />)}
       </ul>
     )
   }

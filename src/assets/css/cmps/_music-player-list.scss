@@ -67,11 +67,14 @@
         background-color: #3a3a51;
         border-radius: 2px;
         &:not(:last-child) {
-          // margin: 0 0 6px 0;
           border-bottom: 1px solid black;
         }
         padding: 6px 6px;
         &:hover {
+          background-color: #282838;
+          color: #6ed8e1;
+        }
+        &.selected{
           background-color: #282838;
           color: #6ed8e1;
         }

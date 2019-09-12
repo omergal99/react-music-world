@@ -12,15 +12,18 @@ class MusicPlayerControls extends Component {
     updateBar: true,
   }
 
+  mapKeyborads = {};
+  mapDoubleKey= {};
+
   componentDidMount() {
     this._setProgressLength();
     document.addEventListener('keydown', this.keyConteols.bind(this));
+    document.addEventListener('keyup', this.keyConteols.bind(this));
   }
 
-  componentWillReceiveProps(nextProps) {
-
-    console.log(nextProps.currSong)
-    console.log(this.props.currSong)
+  componentWillReceiveProps() {
+    // console.log(nextProps.currSong)
+    // console.log(this.props.currSong)
     this._stopSong();
     this._setProgressLength();
     this._activeCurrSong();
@@ -29,6 +32,7 @@ class MusicPlayerControls extends Component {
   componentWillUnmount() {
     this._stopSong();
     document.removeEventListener('keydown', this.keyConteols.bind(this));
+    document.removeEventListener('keyup', this.keyConteols.bind(this));
     if (this.progressLengthTimeout) {
       clearTimeout(this.progressLengthTimeout);
       this.progressLengthTimeout = 0;
@@ -41,24 +45,46 @@ class MusicPlayerControls extends Component {
   }
 
   keyConteols(ev) {
-    if (ev.keyCode === 38) { // Up Arrow
-      if (this.props.currSong.volume <= 0.95) this.props.currSong.volume = (this.props.currSong.volume + (0.05)).toFixed(2);
-    }
-    if (ev.keyCode === 40) { // Down Arrow
-      if (this.props.currSong.volume >= 0.05) this.props.currSong.volume = (this.props.currSong.volume + (-0.05)).toFixed(2);
-    }
-    if (ev.keyCode === 32) { // Space
-      ev.preventDefault();
-      this.togglePlay();
-    }
-    if (ev.keyCode === 37) { // Left Arrow
-      if (Number(this.props.currSong.currentTime) - 5 > 0) {
-        this.props.currSong.currentTime = this.props.currSong.currentTime - 5;
+    const keyCode = ev.keyCode;
+    const iskeyDown = ev.type === 'keydown';
+    this.mapKeyborads[keyCode] = ev.type === 'keydown';
+    // if (this.mapKeyborads[78] && this.mapKeyborads[71]) { // 'N' + 'G'
+    //   this.props.nextSong();
+    // }
+    if (iskeyDown) {
+      if (this.mapDoubleKey[keyCode]) {
+        this.mapDoubleKey[keyCode] += 1;
+        if (this.mapDoubleKey[78] >= 2) { // Double Key 'N'
+          this.mapDoubleKey[78] = 0;
+          this.props.nextSong();
+        }
       }
-    }
-    if (ev.keyCode === 39) { // Right Arrow
-      if (Number(this.props.currSong.currentTime) < this.state.songLength) {
-        this.props.currSong.currentTime = this.props.currSong.currentTime + 5;
+      else {
+        this.mapDoubleKey[keyCode] = 1;
+      }
+      setTimeout(() => {
+        this.mapDoubleKey[keyCode] = 0;
+      }, 400)
+
+      if (keyCode === 38) { // Up Arrow
+        if (this.props.currSong.volume <= 0.95) this.props.currSong.volume = (this.props.currSong.volume + (0.05)).toFixed(2);
+      }
+      if (keyCode === 40) { // Down Arrow
+        if (this.props.currSong.volume >= 0.05) this.props.currSong.volume = (this.props.currSong.volume + (-0.05)).toFixed(2);
+      }
+      if (keyCode === 32) { // Space
+        ev.preventDefault();
+        this.togglePlay();
+      }
+      if (keyCode === 37) { // Left Arrow
+        if (Number(this.props.currSong.currentTime) - 5 > 0) {
+          this.props.currSong.currentTime = this.props.currSong.currentTime - 5;
+        }
+      }
+      if (keyCode === 39) { // Right Arrow
+        if (Number(this.props.currSong.currentTime) < this.state.songLength) {
+          this.props.currSong.currentTime = this.props.currSong.currentTime + 5;
+        }
       }
     }
   }
@@ -94,24 +120,26 @@ class MusicPlayerControls extends Component {
 
   _setProgressLength() {
     this.progressLengthTimeout = setTimeout(() => {
-    if (this.props.currSong.duration) {
-      this.setState({ songLength: this.props.currSong.duration })
-    } else {
+      if (this.props.currSong.duration) {
+        this.setState({ songLength: this.props.currSong.duration })
+      } else {
         this._setProgressLength()
       }
-    }, 200)
+    }, 100)
   }
 
   _activeCurrSong() {
     this.activeCurrSongTimeout = setTimeout(() => {
       if (this.props.currSong.readyState >= 2) {
+        // console.log(this.props.currSong.readyState)
+      // if (this.props.currSong.readyState) {
         if (this.state.isPlaying) {
           this._playAndInterval();
         }
       } else {
         this._activeCurrSong()
       }
-    }, 300)
+    }, 200)
   }
 
   _startProgressInterval() {
