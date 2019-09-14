@@ -14,7 +14,7 @@ class MusicPlayerPreview extends Component {
     var isCurrSong = this.props.currSongName === this.props.song.name;
     return (
       <li className={isCurrSong ? 'selected' : '' } onClick={this.songClicked}>
-        {this.props.song.name}
+        <span>{this.props.song.name}</span>
       </li>
     )
   }

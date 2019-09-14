@@ -15,6 +15,7 @@ class MusicPlayerControls extends Component {
   mapKeyborads = {};
   mapDoubleKey= {};
 
+
   componentDidMount() {
     this._setProgressLength();
     document.addEventListener('keydown', this.keyConteols.bind(this));
@@ -131,8 +132,6 @@ class MusicPlayerControls extends Component {
   _activeCurrSong() {
     this.activeCurrSongTimeout = setTimeout(() => {
       if (this.props.currSong.readyState >= 2) {
-        // console.log(this.props.currSong.readyState)
-      // if (this.props.currSong.readyState) {
         if (this.state.isPlaying) {
           this._playAndInterval();
         }

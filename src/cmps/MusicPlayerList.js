@@ -7,10 +7,10 @@ class MusicPlayerList extends Component {
     super(props, context);
     this.sendingSong = this.sendingSong.bind(this);
   }
- 
+
   sendingSong(song) {
-    this.props.SongClicked(song)
-    // this.props.SongClicked(song)
+    this.props.songClicked(song)
+    // this.props.songClicked(song)
   }
 
   render() {
