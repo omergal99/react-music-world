@@ -59,7 +59,7 @@
       // &::-webkit-scrollbar-button:single-button:vertical:increment:hover {
       //   border-color: #777777 transparent transparent transparent;
       // }
-      li {
+      .song {
         cursor: pointer;
         width: 100%;
         overflow: hidden;
@@ -67,9 +67,10 @@
         background-color: #3a3a51;
         border-radius: 2px;
         padding: 6px 6px;
-        display: flex;
         min-height: auto;
         // min-height: 2.5rem;
+        display: flex;
+        justify-content: space-between;
         &:not(:last-child) {
           border-bottom: 1px solid black;
         }
@@ -77,11 +78,19 @@
           background-color: #282838;
           color: #6ed8e1;
         }
-        &.selected{
+        &.selected {
           background-color: #282838;
           color: #6ed8e1;
         }
-        span{
+        span:last-child {
+          color: #bdc3ffe0;
+          padding: 0 0 0 8px;
+        }
+        .name {
+          margin: auto 0;
+          padding-top: 1px;
+        }
+        .duration {
           margin: auto 0;
           padding-top: 1px;
         }

@@ -10,10 +10,11 @@ class MusicPlayerControls extends Component {
     isPlaying: false,
     songLength: 300,
     updateBar: true,
+    isGoToavailable: true
   }
 
   mapKeyborads = {};
-  mapDoubleKey= {};
+  mapDoubleKey = {};
 
 
   componentDidMount() {
@@ -25,6 +26,7 @@ class MusicPlayerControls extends Component {
   componentWillReceiveProps() {
     // console.log(nextProps.currSong)
     // console.log(this.props.currSong)
+    // console.log(this.props.finishLoad)
     this._stopSong();
     this._setProgressLength();
     this._activeCurrSong();
@@ -91,10 +93,18 @@ class MusicPlayerControls extends Component {
   }
 
   goTo = (ev) => {
-    if (!this.state.isPlaying) {
-      this.togglePlay()
+    // ev.stopPropagation();
+    // ev.preventDefault();
+    if (this.state.isGoToavailable) {
+      // console.log(this.props.currSong.currentTime)
+      // console.log(ev.target.value)
+      this.setState({ isGoToavailable: false })
+      if (!this.state.isPlaying) {
+        this.togglePlay()
+      }
+      this.props.currSong.currentTime = ev.target.value;
+      setTimeout(() => { this.setState({ isGoToavailable: true }) }, 100)
     }
-    this.props.currSong.currentTime = ev.target.value;
   }
 
   togglePlay = () => {
@@ -110,7 +120,9 @@ class MusicPlayerControls extends Component {
 
   _stopSong() {
     this.props.currSong.pause();
-    this.props.currSong.currentTime = 0;
+    if (this.props.finishLoad) {
+      this.props.currSong.currentTime = 0;
+    }
     clearInterval(this.progressBarInterval);
   }
 
@@ -152,7 +164,7 @@ class MusicPlayerControls extends Component {
     }, 10)
   }
 
-  _timeFilter(num) {
+  _timeDisplay(num) {
     var fixed = Number(num).toFixed();
     var sec = fixed % 60;
     if (sec < 10) sec = '0' + sec;
@@ -163,8 +175,8 @@ class MusicPlayerControls extends Component {
 
   render() {
     var songLength = this.state.songLength ? this.state.songLength : 200;
-    var runTime = this._timeFilter(this.props.currSong.currentTime);
-    var endTime = this._timeFilter(songLength);
+    var runTime = this._timeDisplay(this.props.currSong.currentTime);
+    var endTime = this._timeDisplay(songLength);
     var step = (songLength / 50) * 0.01;
     return (
       <div className="player flex flex-col space-center">
@@ -192,6 +204,7 @@ class MusicPlayerControls extends Component {
             }}
             max={songLength ? songLength : 200}
             value={this.props.currSong.currentTime}
+            onInput={this.goTo.bind(this)}
             onChange={this.goTo.bind(this)}
           />
 

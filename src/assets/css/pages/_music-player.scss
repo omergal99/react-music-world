@@ -1,20 +1,41 @@
 .music-player {
   height: calc(100vh - 45px);
-  .upload-file {
-    label {
-      padding: 6px 8px;
-      cursor: pointer;
-      background-color: #3cbcb6;
-      border-radius: 4px;
-      outline: none;
-      margin: 0 6px 6px;
-      font-family: cursive, merienda-font, arial, serif, sans-serif;
-      &:hover {
-        background-color: #37aca6;
+  .clear-upload {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 6px;
+    padding: 0px 6px;
+    .clean {
+      width: 100px;
+      margin: auto 0;
+      button {
+        padding: 3px 5px;
+        background-color: #ee8282;
+        border: 1px solid #ffa5a5;
+        border-radius: 2px;
       }
+      // padding: 6px 2px;
     }
-    input {
-      display: none;
+    .upload-file {
+      label {
+        cursor: pointer;
+        display: inline-block;
+        padding: 6px 8px;
+        background-color: #3cbcb6;
+        border-radius: 4px;
+        outline: none;
+        margin: 0 6px;
+        font-family: cursive, merienda-font, arial, serif, sans-serif;
+        &:hover {
+          background-color: #37aca6;
+        }
+      }
+      input {
+        display: none;
+      }
     }
   }
 }

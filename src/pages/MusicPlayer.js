@@ -16,16 +16,22 @@ class MusicPlayer extends Component {
     // playTime: 0,
     // songLength: 200,
     songs: null,
-    currSongName: 'Bruno Mars - Runaway Baby',
-    currSong: new Audio('assets/mp3/Bruno Mars - Runaway Baby.mp3')
+    currSongName: 'Ed Sheeran & Justin Bieber - I Don\'t Care',
+    currSong: new Audio('assets/mp3/Ed Sheeran & Justin Bieber - I Don\'t Care.mp3'),
+    finishLoad: false
   }
 
   componentDidMount() {
     this.setSongs();
+    this.updatingDuration();
+
   }
 
   componentWillUnmount() {
-
+    if (this.durationTimeout) {
+      clearTimeout(this.durationTimeout);
+      this.durationTimeout = 0;
+    }
   }
 
   setSongs() {
@@ -36,8 +42,16 @@ class MusicPlayer extends Component {
     let reg = new RegExp('(.3gp|.ac3|.aiff|.alac.flac|.m4a|.mp3|.oga|.wav)+$');
     const songsName = require.context('../assets/mp3', false, /(\.3gp|\.aac|\.ac3|\.aiff|\.alac\.flac|\.m4a|\.mp3|\.oga|\.wav|\.wma)+$/).keys();
     var songs = songsName.map(songName => {
-      return { name: songName.substring(2).replace(reg,''), audio: new Audio(`assets/mp3/${songName.substring(2)}`) }
+      return {
+        name: songName.substring(2).replace(reg, ''),
+        audio: new Audio(`assets/mp3/${songName.substring(2)}`),
+        duration: null
+      }
     });
+    // songs.map(song => {
+    //   song.duration = song.audio.duration;
+    // });
+    // console.log(songs)
     this.setState({ songs });
   }
 
@@ -55,16 +69,42 @@ class MusicPlayer extends Component {
       // ------------ USE REDUCE ------------
       var multipleSongs = files.reduce((acc, file) => {
         if (reg.test(file.name)) {
-          acc.push({ name: file.name.replace(reg,''), audio: new Audio(URL.createObjectURL(file)) });
+          acc.push({ name: file.name.replace(reg, ''), audio: new Audio(URL.createObjectURL(file)), duration: null });
         }
         return acc;
       }, [])
+      console.log(multipleSongs[0].audio.preload)
       var updateSongs = [...multipleSongs, ...this.state.songs];
+      updateSongs.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
       this.setState({
-        songs: updateSongs, currSongName: files[0].name.replace(reg,''),
+        songs: updateSongs,
+        currSongName: files[0].name.replace(reg, ''),
         currSong: new Audio(URL.createObjectURL(files[0]))
       });
+      this.updatingDuration();
     }
+  }
+
+  updatingDuration() {
+    this.durationTimeout = setTimeout(() => {
+      var count = 0;
+      var copySongs = this.state.songs;
+      copySongs.map(song => {
+        if (song.audio.duration) {
+          song.duration = this._timeDisplay(song.audio.duration);
+          count++;
+        }
+        return song;
+      });
+      // console.log('count', count)
+      // console.log('copySongs.length', copySongs.length)
+      if (count === copySongs.length) {
+        this.setState({ finishLoad: true, songs: copySongs });
+        // console.log(copySongs)
+      } else {
+        this.updatingDuration()
+      }
+    }, 500)
   }
 
   switchSong(selectedSong) {
@@ -92,6 +132,24 @@ class MusicPlayer extends Component {
     }
   }
 
+  cleanList() {
+    this.setState({ songs: [] });
+    this.setState({
+      songs: [],
+      currSongName: '',
+      currSong: new Audio()
+    });
+  }
+
+  _timeDisplay(num) {
+    var fixed = Number(num).toFixed();
+    var sec = fixed % 60;
+    if (sec < 10) sec = '0' + sec;
+    var min = Math.floor((fixed / 60));
+    if (min < 10) min = '0' + min;
+    return `${min}:${sec}`;
+  }
+
   render() {
     return (
       <section className="music-player">
@@ -108,17 +166,23 @@ class MusicPlayer extends Component {
               currSongName={this.state.currSongName}
             />
           }
-          <div className="upload-file flex wrap space-center">
-            <label title="Upload files" htmlFor="upload-files">Upload Files ☁ </label>
-            <input id="upload-files" onChange={this.audioUpload.bind(this)} multiple type="file" />
+          <div className="clear-upload">
+            <div className="clean"> <button onClick={this.cleanList.bind(this)}>Claen List</button></div>
+            <div className="upload-file">
+              <label title="Upload files" htmlFor="upload-files">Upload Files ☁ </label>
+              <input id="upload-files" onChange={this.audioUpload.bind(this)} multiple type="file" />
 
-            <label title="Upload Directories" htmlFor="upload-directories">Upload Directories ☁ </label>
-            <input id="upload-directories" webkitdirectory="true" mozdirectory="true"
-              onChange={this.audioUpload.bind(this)} multiple type="file" />
+              <label title="Upload Directories" htmlFor="upload-directories">Upload Directories ☁ </label>
+              <input id="upload-directories" webkitdirectory="true" mozdirectory="true"
+                onChange={this.audioUpload.bind(this)} multiple type="file" />
+            </div>
+            <div className="clean">
+              {/* <button>Claen</button> */}
+            </div>
           </div>
         </div>
 
-        <MusicPlayerControls currSong={this.state.currSong}
+        <MusicPlayerControls currSong={this.state.currSong} finishLoad={this.state.finishLoad}
           prevSong={this.prevSong.bind(this)}
           nextSong={this.nextSong.bind(this)}
         />
