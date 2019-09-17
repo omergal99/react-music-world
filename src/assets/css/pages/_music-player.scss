@@ -11,6 +11,7 @@
     .clean {
       width: 100px;
       margin: auto 0;
+      padding: 0 0 10px 0;
       button {
         padding: 3px 5px;
         background-color: #ee8282;
@@ -18,6 +19,9 @@
         border-radius: 2px;
       }
       // padding: 6px 2px;
+    }
+    .some-opt {
+      width: 100px;
     }
     .upload-file {
       label {

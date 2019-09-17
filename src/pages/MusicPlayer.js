@@ -48,6 +48,7 @@ class MusicPlayer extends Component {
         duration: null
       }
     });
+    songs.sort(this._sortNames);
     // songs.map(song => {
     //   song.duration = song.audio.duration;
     // });
@@ -73,9 +74,9 @@ class MusicPlayer extends Component {
         }
         return acc;
       }, [])
-      console.log(multipleSongs[0].audio.preload)
+      // console.log(multipleSongs[0].audio.preload)
       var updateSongs = [...multipleSongs, ...this.state.songs];
-      updateSongs.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+      updateSongs.sort(this._sortNames);
       this.setState({
         songs: updateSongs,
         currSongName: files[0].name.replace(reg, ''),
@@ -83,6 +84,10 @@ class MusicPlayer extends Component {
       });
       this.updatingDuration();
     }
+  }
+
+  _sortNames(a, b) {
+    return ((a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)
   }
 
   updatingDuration() {
@@ -124,11 +129,13 @@ class MusicPlayer extends Component {
   }
 
   nextSong() {
-    var currSongIdx = this.state.songs.findIndex(song => song.name === this.state.currSongName);
-    if (this.state.songs.length - 1 === currSongIdx) {
-      this.switchSong(this.state.songs[0]);
+    var copy = [...this.state.songs]
+    var revers = copy.reverse(); // for case two songs with same name
+    var currSongIdx = revers.findIndex(song => song.name === this.state.currSongName);
+    if (currSongIdx) {
+      this.switchSong(revers[currSongIdx - 1]);
     } else {
-      this.switchSong(this.state.songs[currSongIdx + 1]);
+      this.switchSong(revers[revers.length - 1]);
     }
   }
 
@@ -176,7 +183,7 @@ class MusicPlayer extends Component {
               <input id="upload-directories" webkitdirectory="true" mozdirectory="true"
                 onChange={this.audioUpload.bind(this)} multiple type="file" />
             </div>
-            <div className="clean">
+            <div className="some-opt">
               {/* <button>Claen</button> */}
             </div>
           </div>
