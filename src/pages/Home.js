@@ -11,6 +11,7 @@ class Home extends Component {
   componentDidMount() {
 
   }
+  
   playerClicked(ev) {
     ev.preventDefault()
     this.props.history.push(`/musicPlayer`)

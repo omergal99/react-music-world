@@ -19,6 +19,7 @@ class MusicPlayerControls extends Component {
 
   componentDidMount() {
     this._setProgressLength();
+    clearInterval(this.progressBarInterval);
     document.addEventListener('keydown', this.keyConteols.bind(this));
     document.addEventListener('keyup', this.keyConteols.bind(this));
   }

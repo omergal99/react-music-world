@@ -24,7 +24,6 @@ class MusicPlayer extends Component {
   componentDidMount() {
     this.setSongs();
     this.updatingDuration();
-
   }
 
   componentWillUnmount() {
